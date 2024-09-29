@@ -1,0 +1,28 @@
+import requests
+import json
+
+# Gemini 1.5 API endpoint and your API key
+gemini_api_endpoint = 'https://api.gemini.com/v1/chat'
+api_key = 'your-gemini-api-key'
+
+# Define the prompt
+prompt = """
+Offer career advice to a user with verified credentials who just graduated with a degree in computer science and wants to work in AI. Suggest study resources and job opportunities.
+"""
+
+# Define the payload
+payload = {
+    "model": "gemini-1.5-flash-128k",
+    "prompt": prompt,
+    "max_tokens": 128
+}
+
+# Send the request to Gemini API
+response = requests.post(
+    gemini_api_endpoint,
+    headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+    data=json.dumps(payload)
+)
+
+# Output the response
+print(response.json().get('response', '').strip())
